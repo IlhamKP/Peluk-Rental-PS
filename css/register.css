@@ -1,0 +1,112 @@
+body{
+    background: #0a0e14;;
+    font-family: 'Oxanium',sans-serif;
+    font-style: normal;
+    color: white;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+@font-face{
+    font-family: 'Oxanium';
+    src: url('../font/Oxanium-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.header-login{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.kotak{
+    width: 360px;
+    background: #12161f;
+    border-radius: 20px;
+    padding: 40px;
+    border: 1px solid #232a38;
+}
+
+.kotak .header-kotak{
+    padding-bottom: 12px;
+}
+.kotak label{
+    font-size: 20px;
+    color: #e8eaed;
+    font-weight: bold;
+    
+}
+.kotak span{
+    font-size: 14px;
+    color: #8993a4;
+}
+
+.letak{
+    display:flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 12px;
+    margin-top: 12px;
+}
+
+.letak label{
+    font-size: 12px;
+    font-weight: normal;
+}
+.letak input{
+    border: 1px solid #232a38;
+    background: #181d29;
+    border-radius: 10px;
+    padding: 12px;
+    color: white;
+    width: 360px;
+}
+
+.letak input:focus{
+    outline: none;
+    border: 1px solid #22d3ee;
+    box-shadow: 0 0 10px rgba(34, 211, 238, 0.4);
+}
+
+.letak button{
+    margin-top: 10px;
+    width: 360px;
+    padding : 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: aqua;
+    font-weight: bold;
+    border: 2px solid black;
+}
+
+.letak button:hover{
+    opacity: 90%;
+    border: 2px solid #22d3ee;
+    box-shadow: inset 0px 0px 0px 2px black;
+}
+.letak button:focus{
+    outline: none;
+    border: 2px solid #22d3ee;
+    box-shadow: inset 0px 0px 0px 2px black;
+}
+
+.letak-daftar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.letak-daftar label{
+    font-size: 16px;
+}
+
+.letak-daftar a{
+    color:aqua;
+    text-decoration: none;
+}
+.letak-daftar a:hover{
+    opacity: 80%;
+}
