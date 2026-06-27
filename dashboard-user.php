@@ -1,6 +1,6 @@
 <?php
-require_once 'koneksi.php';
 session_start();
+require_once 'koneksi.php';
 
 if(!isset($_SESSION['id_user'])){
     header("location: index.php");
@@ -39,8 +39,26 @@ if($sesi){
     ");
 }
 
+$querynotif = mysqli_query($conn,"
+SELECT *
+FROM notifikasi
+WHERE id_user='$id_user'
+AND status='belum_dibaca'
+");
 
+$adaNotif = mysqli_num_rows($querynotif) > 0;
+
+$querynotif = mysqli_query($conn,"
+SELECT *
+FROM notifikasi
+WHERE id_user='$id_user'
+ORDER BY dibuat DESC
+");
+
+$popup = isset($_GET['notif']);
 ?>
+
+
 
 
 
@@ -57,7 +75,42 @@ if($sesi){
         <h3>PELUK Coffee Shop & Rental PS</h3>
         <div class="kanan">
             <label><span class="header-teks">Hai, </span><?= ($_SESSION['username']);?></label>
-            <button><img src="./icon/bell.png" ></button>
+            <div class="notif">
+                <a href="baca-notif.php" id="btnNotif">
+                    <img src="./icon/bell.png">
+                    <?php if($adaNotif): ?>
+                        <span class="badge"></span>
+                        <?php endif; ?>
+                </a>
+                <div class="popup-notif <?= $popup ? 'show' : '' ?> " id="popupNotif">
+                    <div class="isi-notif">
+                        
+                        <div class="header-notif">
+                            <label>Notifikasi</label>
+                        </div>
+                        
+                        <?php if(mysqli_num_rows($querynotif) > 0): ?>
+                            
+                            <?php while($notif = mysqli_fetch_assoc($querynotif)): ?>
+                            <div class="ada-notif">
+                                <div class="bawah">
+                                    <label><?= $notif['pesan']; ?></label>
+                                    <span>
+                                        <?= date('d M, H.i', strtotime($notif['dibuat'])); ?>
+                                    </span>
+                                </div>
+                            </div>
+                                <?php endwhile; ?>
+                                <?php else: ?>
+                                    <div class="tidak-ada-notif">
+                                        <div class="bawah">
+                                            <label>Belum ada notifikasi.</label>
+                                        </div>
+                                    </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                    </div>
             <button onclick="window.location.href='logout.php'">Keluar</button>
         </div>
     </div>
@@ -138,6 +191,20 @@ if($sesi){
         <?php endif; ?>
     </div>
 </body>
+
+<?php if(isset($_SESSION['pesan'])): ?>
+<div class="toast <?= $_SESSION['status'] ?>">
+    <?= $_SESSION['pesan'] ?>
+</div>
+
+<?php
+unset($_SESSION['pesan']);
+unset($_SESSION['status']);
+?>
+
+<?php endif; ?>
+
+<?php if($sesi): ?>
 <script>
 
 const waktuSelesai = new Date("<?= $sesi['waktu_selesai']; ?>").getTime();
@@ -149,7 +216,6 @@ function updateTimer(){
     let selisih = Math.floor((waktuSelesai - sekarang)/1000);
 
     if(selisih <= 0){
-
         document.getElementById("timer").innerHTML = "00:00:00";
         clearInterval(timer);
         return;
@@ -163,12 +229,45 @@ function updateTimer(){
         String(jam).padStart(2,'0') + ":" +
         String(menit).padStart(2,'0') + ":" +
         String(detik).padStart(2,'0');
-
 }
 
 updateTimer();
 
 const timer = setInterval(updateTimer,1000);
 
+</script>
+<?php endif; ?>
+
+<script>
+const toast = document.querySelector(".toast");
+
+if (toast) {
+    setTimeout(() => {
+        toast.classList.add("hide");
+    }, 3000);
+
+    toast.addEventListener("transitionend", () => {
+        toast.remove();
+    });
+}
+
+const btnNotif = document.getElementById("btnNotif");
+const popupNotif = document.getElementById("popupNotif");
+const badge = document.querySelector(".badge");
+
+btnNotif.addEventListener("click", function(e){
+
+    e.stopPropagation();
+    popupNotif.classList.toggle("show");
+    if(badge){
+        badge.style.display = "none";
+    }
+});
+
+document.addEventListener("click", function(){
+
+    popupNotif.classList.remove("show");
+
+});
 </script>
 </html>

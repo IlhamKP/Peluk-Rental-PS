@@ -14,13 +14,16 @@ $user = mysqli_fetch_assoc($qUser);
 $username = $user['username'];
 
 // ambil harga unit
-$q = mysqli_query($conn,
-"SELECT harga_perjam FROM unit_ps WHERE id_unit='$id_unit'");
+$q = mysqli_query($conn,"
+SELECT harga_perjam, nama_unit
+FROM unit_ps
+WHERE id_unit='$id_unit'
+");
 
 $unit = mysqli_fetch_assoc($q);
 
 $harga = $unit['harga_perjam'];
-
+$nama_unit = $unit['nama_unit'];
 $mulai = date("Y-m-d H:i:s");
 
 $selesai = date(
@@ -61,6 +64,11 @@ mysqli_query($conn,"
 UPDATE unit_ps
 SET status='dipakai'
 WHERE id_unit='$id_unit'
+");
+
+mysqli_query($conn,"
+INSERT INTO notifikasi(id_user,pesan)
+VALUES('$id_user','Sesi kamu di $nama_unit telah dimulai.')
 ");
 
 header("Location: dashboard-admin.php");
