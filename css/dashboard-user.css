@@ -1,3 +1,265 @@
 body{
-    background: red;
+    background: #0a0e14;
+    color: white;
+    font-family: 'Oxanium',sans-serif ;
+    margin: 0;
+}
+
+@font-face{
+    font-family: 'Oxanium';
+    src: url('../font/Oxanium-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+::-webkit-scrollbar{
+    display: none;
+}
+
+.header{
+    display: flex;
+    background: rgba(10, 14, 20, 0.75);
+    border-bottom: 1px solid #232a38;
+    align-items: center;
+    height: 60px;
+    justify-content: space-between;
+    padding: 0px 172px;
+}
+
+.header .kanan{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    /* background: red; */
+    /* width: 100%; */
+}
+
+.header label{
+    font-weight: bold;
+}
+.header .header-teks{
+    color: #525b6b;
+    font-size: 14px;
+    width: 10px;
+}
+
+.header button{
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+    background: none;
+    border: 1px solid #232a38;
+    border-radius: 10px;
+    font-size: 12px;
+    padding: 8px;
+    color: #8993a4;
+    font-family: 'Oxanium',sans-serif;
+    cursor: pointer;
+}
+
+.header button:hover{
+    color: #e8eaed;
+}
+
+.header button img{
+    width: 20px;
+    height: 20px;
+}
+
+.isi{
+    padding : 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.belum-ada{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.belum-ada .kotak{
+    border: 1px solid #232a38;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    padding: 32px;
+    background: #12161f;
+    margin-top: 40px;
+}
+
+.belum-ada .kotak img{
+    width: 40px;
+    height: 40px;
+}
+
+.belum-ada .teks{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.belum-ada .teks label{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.belum-ada .teks span{
+    color: #8993a4;
+    text-align:center;
+    width: 400px;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.belum-ada .unit {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 20px;
+    gap: 12px;
+}
+
+.belum-ada .unit .card{
+    border: 1px solid #232a38;
+    background: #12161f;
+    border-radius: 12px;
+    padding: 20px;
+    width: 160px;
+    margin-top: 4px;
+}
+
+.card .atas{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card .atas label{
+    font-size: 12px;
+    color: #525b6b;
+}
+
+.card .atas .tersedia{
+    background: #2ee6a6;
+    border-radius: 100%;
+    width: 8px;
+    height: 8px;
+}
+.card .atas .dipakai{
+    background: #ff2d75;
+    border-radius: 100%;
+    width: 8px;
+    height: 8px;
+}
+
+
+.card .tengah,.card .bawah{
+    margin-top: 8px;
+}
+
+.card .tengah label{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.card .bawah .tersedia{
+    font-size: 12px;
+    color: #2ee6a6;
+}
+
+.card .bawah .dipakai{
+    font-size: 12px;
+    color: #ff2d75;
+}
+
+.ada {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.ada .atas{
+    border:1px solid #232a38;
+    background : #181d29;
+    color: #8993a4;
+    font-size: 12px;
+    padding: 8px 20px;
+    border-radius: 20px;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ada .tengah{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 10px solid #2ee6a6;
+    border-radius: 100%;
+    width: 250px;
+    height: 250px;
+    font-size: 40px;
+}
+
+.ada .tengah label{
+    font-size: 16px;
+    color: #525b6b;
+    margin-top: 8px;
+}
+
+.ada .bawah{
+    margin-top: 20px;
+    border: 1px solid #232a38;
+    background: #12161f;
+    padding: 20px;
+    width: 720px;
+    gap: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ada .bawah .riwayat{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.ada .bawah .card label{
+    /* border: 2px solid r */
+    color: #525b6b;
+    font-size: 12px;
+}
+.ada .bawah .card span{
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.ada .riwayat-tambah{
+    border-top: 1px solid #232a38;
+    padding-top: 16px;
+
+}
+
+.ada .riwayat-tambah label{
+    color: #525b6b;
+    font-size: 12px;
+}
+
+.ada .riwayat-tambah .tambah-waktu{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    color: #8993a4;
+    font-size: 12px;
 }

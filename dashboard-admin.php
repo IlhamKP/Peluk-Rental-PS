@@ -75,6 +75,7 @@ WHERE sesi.status='habis'
 ORDER BY sesi.id_sesi DESC
 ");
 
+$tab = $_GET['tab'] ?? 'sesi';
 ?>
 
 
@@ -89,8 +90,11 @@ ORDER BY sesi.id_sesi DESC
 <body>
     <div class="header">
         <h3>PELUK Coffee Shop & Rental PS</h3>
-        <label><span class="header-teks">Hai,</span> Admin Cafe <span class="role">ADMIN</span>
-        <a href="index.php">Keluar</a></label>
+        <div class="kanan">
+            <label><span class="header-teks">Hai, </span><?= ($_SESSION['username']);?></label>
+            <span class="role"><?=($_SESSION['role']);?></span>
+            <button onclick="window.location.href='logout.php'">Keluar</button>
+        </div>
     </div>
     <div class="isi">
     <div class="statistik">
@@ -129,7 +133,7 @@ ORDER BY sesi.id_sesi DESC
     </div>
 
     <div class="cek">
-        
+
             <button onclick="showTab('sesi')" class="tab-btn active">Unit & Sesi</button>
             <button onclick="showTab('riwayat')" class="tab-btn">Riwayat</button>
             <button onclick="showTab('kelola')" class="tab-btn">Kelola Unit</button>
@@ -295,7 +299,7 @@ ORDER BY sesi.id_sesi DESC
                             </td>
                             
                             <td class="tambahan">
-                                <?= $row['tambahan_menit'] > 0 ? '+' . $row['tambahan_menit'] . 'm' : '-'; ?>
+                                <?= $row['total_tambahan_menit'] > 0 ? '+' . $row['total_tambahan_menit'] . 'm' : '-'; ?>
                             </td>
                         </tr>
                         <?php endwhile; ?>
@@ -338,7 +342,7 @@ ORDER BY sesi.id_sesi DESC
                 </table>
             </div>
             <div class="tambah-unit">
-                <form action="tambah-unit.php" method="POST">
+                <form action="tambah-unit.php" method="POST" onsubmit="localStorage.setItem('tabAktif', 'kelola')">
                 <div class="header-tambah-unit">
                     <label>Tambah unit baru</label>
                 </div>
@@ -367,21 +371,32 @@ ORDER BY sesi.id_sesi DESC
 <script>
 function showTab(tabId){
 
-    // Sembunyikan semua tab
-    document.querySelectorAll('.tab-content').forEach(tab=>{
-        tab.classList.remove('active');
+    localStorage.setItem("tabAktif", tabId);
+
+    document.querySelectorAll(".tab-content").forEach(tab=>{
+        tab.style.display="none";
     });
 
-    // Hapus active semua tombol
-    document.querySelectorAll('.tab-btn').forEach(btn=>{
-        btn.classList.remove('active');
+    document.getElementById(tabId).style.display="block";
+
+    document.querySelectorAll(".tab-btn").forEach(btn=>{
+        btn.classList.remove("active");
     });
 
-    // Tampilkan tab yang dipilih
-    document.getElementById(tabId).classList.add('active');
+    // Cari tombol berdasarkan tabId
+    document.querySelectorAll(".tab-btn").forEach(btn=>{
+        if(btn.getAttribute("onclick").includes("'" + tabId + "'")){
+            btn.classList.add("active");
+        }
+    });
+}
 
-    // Aktifkan tombol yang diklik
-    event.target.classList.add('active');
+window.onload = function(){
+
+    const tab = localStorage.getItem("tabAktif") || "sesi";
+
+    showTab(tab);
+
 }
 
 function buka(id,namaUnit){
@@ -477,7 +492,6 @@ function mulaiTimer(element, waktuSelesai){
 
     interval = setInterval(update,1000);
 }
-
 
 </script>
 </html>

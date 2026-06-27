@@ -35,6 +35,12 @@ body{
     width: 10px;
 }
 
+.header .kanan{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
 .header .role{
     margin-left: 8px;
     background: rgba(124, 58, 237, 0.15);
@@ -45,17 +51,27 @@ body{
     padding: 8px;
 }
 
-.header a{
+.header button{
+    align-items: center;
+    justify-content: center;
     margin-left: 8px;
-    text-decoration: none;
-    color: #8993a4;
+    background: none;
     border: 1px solid #232a38;
-    padding: 12px;
-    border-radius: 10px; 
+    border-radius: 10px;
     font-size: 12px;
+    padding: 8px;
+    color: #8993a4;
+    font-family: 'Oxanium',sans-serif;
+    cursor: pointer;
 }
-.header a:hover{
-    background: rgba(77, 77, 77, 0.562) ;
+
+.header button:hover{
+    color: #e8eaed;
+}
+
+.header button img{
+    width: 20px;
+    height: 20px;
 }
 
 .isi{
